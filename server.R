@@ -2,6 +2,7 @@
 AnimalsAndDatabases <- tibble::tibble(readRDS(file = "./AppData/AnimalsAndDatabases.rds"))
 
 server <- shinyServer(function(input, output) {
+  
   # Generate the file preview ----
   output$preview <- renderTable({
     req(input$dataFile)
@@ -77,7 +78,6 @@ server <- shinyServer(function(input, output) {
     # Clustering using TOM-based dissimilarity
     proTree <- hclust(as.dist(dissTOM), method = "average")
 
-    path <- getwd()
     message("Creating results folder")
     dir.create(file.path(path, "Results"))
 
@@ -251,6 +251,7 @@ server <- shinyServer(function(input, output) {
     sheetNumber <- length(wgcnaResults)
     organismID <- input$organismID
     organismIndex <- which(AnimalsAndDatabases[[1]] == organismID)
+    installed.packages(AnimalsAndDatabases[[4]][organismIndex])
     library(AnimalsAndDatabases[[4]][organismIndex], character.only = TRUE)
     ## ModuleNames2 stands for "module names starting at the second page of the WGCNA workbook"
     ModuleNames2 <- names(wgcnaResults)[2:length(wgcnaResults)]    
@@ -281,7 +282,7 @@ server <- shinyServer(function(input, output) {
     names(AllezEnriched) <- ModuleNames2
 
     ## Create the workbook with the Allez sheets
-    dir.create("./Results")
+    dir.create(file.path(path, "Results"))
     createAllezEnrichmentXLSX(geneUniverse, AllezEnriched)
 
     message("Allez Enrichment workflow completed")

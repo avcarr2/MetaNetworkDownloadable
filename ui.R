@@ -39,10 +39,7 @@ ui <- shinyUI(navbarPage("WGCNA and GO analysis",
                                               value = 1),
                                     checkboxInput(inputId = "automaticPowerSelection", 
                                                   value = FALSE, label = "Check for automatic power selection"),
-                                    #textInput(inputId = "workbookname", label = "Enter custom name for the excel workbook output", value = ""), Maybe someday.
-                                    #checkboxInput(inputId = "ttestbool", label = "Check if data includes column of TTEST values", value = FALSE),
-                                    #checkboxInput(inputId = "exportvisAnt", label = "Check if you want to export to VisANT. Not functional yet.", value = FALSE),
-                                    #textInput(inputId = "filerename", label = "Enter analysis name", value = ""),
+
                                     # line break (to make it look nicer) ----
                                     br(),
                                     h3("Advanced options"),
