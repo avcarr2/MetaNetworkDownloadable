@@ -282,6 +282,7 @@ server <- shinyServer(function(input, output) {
     names(AllezEnriched) <- ModuleNames2
 
     ## Create the workbook with the Allez sheets
+    path <- getwd()
     dir.create(file.path(path, "Results"))
     createAllezEnrichmentXLSX(geneUniverse, AllezEnriched)
 
