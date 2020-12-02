@@ -29,7 +29,7 @@ server <- shinyServer(function(input, output) {
     IgnoreCols <- as.numeric(input$ignorecols)
     softPower <- 12 # sets default power parameter to 12
     AdvancedOptionsEnabled <- input$advancedOptions
-      
+    path <- getwd()  
       if(input$threads == ""){
         enableWGCNAThreads()
       }else{
@@ -78,7 +78,7 @@ server <- shinyServer(function(input, output) {
     # Clustering using TOM-based dissimilarity
     proTree <- hclust(as.dist(dissTOM), method = "average")
 
-    message("Creating results folder")
+    message("Creating Results folder")
     dir.create(file.path(path, "Results"))
 
     message("Identifying modules")
@@ -168,8 +168,6 @@ server <- shinyServer(function(input, output) {
 
     ## Output the files
     message("Starting output to Results folder")
-    path <- getwd()
-    dir.create(file.path(path, "Results"))
     # Write the files
     # module memberships
     userInputDatabase <- read_tsv(input$databaseFile$datapath)
